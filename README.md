@@ -4,8 +4,41 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project UI
 
+### home page
+
 ![Home](/src/images/UI_SS/home.jpeg)
 ![Home](/src/images/UI_SS/home1.jpeg)
+
+### item page
+
+![item](/src/images/UI_SS/item.jpeg)
+![item](/src/images/UI_SS/item2.jpeg)
+![item](/src/images/UI_SS/item3.jpeg)
+
+### edit post page
+
+![post](/src/images/UI_SS/post_ad.jpeg)
+![post](/src/images/UI_SS/post_ad1.jpeg)
+![post](/src/images/UI_SS/post_ad2.jpeg)
+
+### personalise posts page
+
+![ads](/src/images/UI_SS/your_ads.jpeg)
+
+## File Structure
+
+### Pages
+
+    ├── Home
+    ├── SignUp
+    ├── SignIn
+    ├── ActivateAccount
+    ├── ChangePassword
+    ├── FindAccount
+    ├── Item
+    ├── MyAds
+    ├── PostAd
+    ├── UpdateAd
 
 ## Available Scripts
 
