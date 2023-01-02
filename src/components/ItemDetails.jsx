@@ -1,21 +1,33 @@
 import React from "react";
 import "../styles/itemDetails.css";
+import moment from "moment";
+
 const ItemDetails = ({ ad }) => {
+  const time = moment(ad.createdAt).fromNow();
+
   return (
     <div className="details_container">
       <h4 className="title">Details</h4>
       <div className="items">
         <div className="item">
           <p className="attribute">Brand</p>
-          <p className="value">A.K Jha</p>
+          <p className="value">{ad.brand}</p>
+        </div>
+        <div className="item">
+          <p className="attribute">Product</p>
+          <p className="value">{ad.title}</p>
         </div>
         <div className="item">
           <p className="attribute">Price</p>
-          <p className="value">Rs 450</p>
+          <p className="value">Rs. {ad.price}</p>
         </div>
         <div className="item">
           <p className="attribute">Condition</p>
-          <p className="value">Used</p>
+          <p className="value">{ad.condition}</p>
+        </div>
+        <div className="item">
+          <p className="attribute">Last Updated at</p>
+          <p className="value">{time}</p>
         </div>
       </div>
 
@@ -23,18 +35,7 @@ const ItemDetails = ({ ad }) => {
 
       <div className="description_contianer">
         <h4 className="title">Description</h4>
-        <p className="description">
-          This book is meant to serve as a textbook of Physics for the
-          undergraduate students of science and engineering. Exhausted treatment
-          of topics in quantum mechanics, statistical mechanics, nuclear
-          physics, electromagnetic theory, X-rays production, properties and
-          applications and ultrasonics and accoustics of buildings have been
-          presented. These topics have been presented in easy to understand and
-          simple language. Large number of solved numericals have been included
-          to give a quantitative idea of the subject. Short and long answer type
-          questions and unsolved numericals have been given at the end of each
-          chapter for practice.
-        </p>
+        <p className="description">{ad.description}</p>
       </div>
     </div>
   );

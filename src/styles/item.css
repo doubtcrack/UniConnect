@@ -1,3 +1,15 @@
+.carousel-control-next-icon {
+  background-image: url(../images/arrow-right.gif);
+  height: 70px;
+  width: 70px;
+}
+.carousel-control-prev-icon {
+  background-image: url(../images/arrow-right.gif);
+  transform: rotate(180deg);
+  height: 70px;
+  width: 70px;
+}
+
 .details_container {
   padding: 10px;
   border-radius: 4px;

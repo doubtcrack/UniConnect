@@ -62,7 +62,7 @@ function Header() {
   };
 
   return (
-    <Navbar bg="white" expand="lg" style={{ height: "80px" }}>
+    <Navbar bg="light" expand="lg" style={{ height: "80px" }}>
       <Container>
         <NavLink to="/" className="navbar-brand">
           <img src={logo} width={200} height={70} alt="logo" />
@@ -70,7 +70,7 @@ function Header() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex" style={{ flex: 1 }}>
-            {/* <div style={{ width: "50%" }}>
+            <div style={{ width: "50%" }}>
               <GooglePlacesAutocomplete
                 selectProps={{
                   value,
@@ -80,7 +80,7 @@ function Header() {
                   componentRestrictions: { country: ["in"] },
                 }}
               />
-            </div> */}
+            </div>
             <Form.Control
               type="search"
               placeholder="Search"

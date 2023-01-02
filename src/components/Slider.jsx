@@ -1,28 +1,26 @@
 import React from "react";
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
-
-const Slider = () => {
+import { Carousel } from "react-bootstrap";
+import "../styles/item.css";
+const Slider = ({ images }) => {
   return (
-    <MDBCarousel showControls showIndicators>
-      <MDBCarouselItem
-        className="w-100 d-block"
-        itemId={1}
-        src="https://m.media-amazon.com/images/I/41x99Vg1gAL._SX367_BO1,204,203,200_.jpg"
-        alt="..."
-      />
-      <MDBCarouselItem
-        className="w-100 d-block"
-        itemId={2}
-        src="https://m.media-amazon.com/images/I/41ZXAQ2lGOL.jpg"
-        alt="..."
-      />
-      <MDBCarouselItem
-        className="w-100 d-block"
-        itemId={3}
-        src="https://m.media-amazon.com/images/I/417ZhbvieeL.jpg"
-        alt="..."
-      />
-    </MDBCarousel>
+    <>
+      <Carousel style={{ background: "#fff" }} indicators={false}>
+        {images.map((img) => {
+          return (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={`../uploads/${img}`}
+                alt="First slide"
+                width={500}
+                height={500}
+                style={{ objectFit: "contain" }}
+              />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+    </>
   );
 };
 

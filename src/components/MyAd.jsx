@@ -1,105 +1,102 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Card } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { deleteAd } from "../redux/ads/adsSlice";
-import moment from "moment";
+import { IconButton, Menu, MenuItem } from '@mui/material'
+import React, { useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Card } from 'react-bootstrap'
+import { BsThreeDots } from 'react-icons/bs'
+import { useDispatch } from 'react-redux'
+import { deleteAd } from '../redux/ads/adsSlice'
+import moment from 'moment'
 
 const MyAd = ({ ad }) => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // const { title, images, price, _id: id, createdAt } = ad;
+  const { title, images, price, _id: id, createdAt } = ad
 
-  // const maxLength = 30;
-  // let trimmedString = title.substr(0, maxLength);
+  const maxLength = 30
+  let trimmedString = title.substr(0, maxLength)
 
-  // trimmedString = trimmedString.substr(
-  //   0,
-  //   Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
-  // );
+  trimmedString = trimmedString.substr(
+    0,
+    Math.min(trimmedString.length, trimmedString.lastIndexOf(' '))
+  )
 
-  // const date = moment(createdAt).format("ll");
+  const date = moment(createdAt).format('ll')
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const handleEditBtnClick = () => {
-    // navigate(`/update/item/${id}`, { state: id });
-  };
+    navigate(`/update/item/${id}`, { state: id })
+  }
 
   return (
-    <Card style={{ cursor: "pointer" }}>
+    <Card style={{ cursor: 'pointer' }}>
       <div
         style={{
-          padding: "2rem 1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          padding: '2rem 1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <span style={{ fontSize: "14px" }}>
-          From <span style={{ fontWeight: "bold" }}>1Nov 26, 2022</span>
+        <span style={{ fontSize: '14px' }}>
+          From <span style={{ fontWeight: 'bold' }}>{date}</span>
         </span>
 
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            flex: "1",
-            marginLeft: "3.5rem",
+            display: 'flex',
+            alignItems: 'center',
+            flex: '1',
+            marginLeft: '3.5rem',
           }}
         >
           <img
-            src={
-              "https://m.media-amazon.com/images/S/aplus-media-library-service-media/772273b8-9998-4832-adf3-10fd44c4e2df.__CR0,65,395,395_PT0_SX300_V1___.png"
-            }
+            src={`./uploads/${images[0]}`}
             alt="profile"
             width={50}
             height={50}
           />
           <p
             style={{
-              marginBottom: "0px",
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginLeft: "8px",
+              marginBottom: '0px',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              marginLeft: '8px',
             }}
           >
-            Chemistry Lab Coat
-            {/* {title.length > 30 ? `${trimmedString}...` : "A.K Jha"} */}
+            {title.length > 30 ? `${trimmedString}...` : title}
           </p>
         </div>
 
         <div
           style={{
             flex: 1,
-            justifyContent: "space-between",
-            display: "flex",
-            alignItems: "center",
+            justifyContent: 'space-between',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
-          <span style={{ fontSize: "14px" }}>Rs 450</span>
+          <span style={{ fontSize: '14px' }}>Rs {price}</span>
           <span
             style={{
-              background: "#23e5db",
-              color: "#002f34",
-              padding: "4px 2rem",
-              borderRadius: "1rem",
+              background: '#23e5db',
+              color: '#002f34',
+              padding: '4px 2rem',
+              borderRadius: '1rem',
             }}
           >
             Active
           </span>
-          <span style={{ fontSize: "14px" }}>This ad is currently live</span>
+          <span style={{ fontSize: '14px' }}>This ad is currently live</span>
 
           <IconButton onClick={handleClick}>
             <BsThreeDots />
@@ -112,25 +109,25 @@ const MyAd = ({ ad }) => {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            "aria-labelledby": "basic-button",
+            'aria-labelledby': 'basic-button',
           }}
           sx={{
-            ".MuiPaper-root": {
-              width: "10%",
-              padding: ".5rem",
-              left: "auto !important",
-              right: "300px",
+            '.MuiPaper-root': {
+              width: '10%',
+              padding: '.5rem',
+              left: 'auto !important',
+              right: '300px',
             },
           }}
         >
           <div>
-            <MenuItem /*onClick={handleEditBtnClick}*/>Edit now</MenuItem>
+            <MenuItem onClick={handleEditBtnClick}>Edit now</MenuItem>
           </div>
-          <MenuItem /*onClick={() => dispatch(deleteAd(id))}*/>Delete</MenuItem>
+          <MenuItem onClick={() => dispatch(deleteAd(id))}>Delete</MenuItem>
         </Menu>
       </div>
     </Card>
-  );
-};
+  )
+}
 
-export default MyAd;
+export default MyAd

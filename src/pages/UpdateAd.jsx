@@ -79,17 +79,16 @@ const UpdateAd = () => {
     dispatch(updateAd({ id, ad: formData }));
 
     setAllValues({
-      title: "",
-      description: "",
-      brand: "",
-      condition: "",
-      category: "",
-      price: null,
+      title: allValues.title,
+      description: allValues.description,
+      brand: allValues.brand,
+      condition: allValues.condition,
+      category: allValues.category,
+      price: allValues.price,
       images: [],
       location: "",
     });
   };
-
   if (isLoading) {
     return (
       <div
@@ -168,6 +167,7 @@ const UpdateAd = () => {
                   <option value="Hostel Stuff">Hostel Stuff</option>
                   <option value="Tablets">Tablets</option>
                   <option value="Laptops">Laptops</option>
+                  <option value="Others">Others</option>
                 </Form.Select>
               </div>
 
@@ -191,7 +191,7 @@ const UpdateAd = () => {
                     onChange: setValue,
                   }}
                   autocompletionRequest={{
-                    componentRestrictions: { country: ["pk"] },
+                    componentRestrictions: { country: ["in"] },
                   }}
                 />
               </div>

@@ -1,14 +1,24 @@
+import moment from "moment";
 import { Card, Col } from "react-bootstrap";
-import book from "../images/ak_jha.jpg";
+import { useNavigate } from "react-router-dom";
 
-export const InnerCard = (img) => {
-  console.log(img.img);
+export const InnerCard = ({ ad }) => {
+  const navigate = useNavigate();
+  var title = ad.title;
+  if (title.length > 45) {
+    title = title.substring(0, 45).concat("...");
+  }
+  const time = moment(ad.createdAt).fromNow();
+
+  const handleClick = (id) => {
+    navigate(`/item/${id}`, { state: ad });
+  };
+
   return (
-    <Col md={3}>
+    <Col md={3} key={ad._id} onClick={() => handleClick(ad._id)}>
       <Card
         style={{
-          width: "80%",
-          height: "80%",
+          width: "100%",
           cursor: "pointer",
           border: "none",
           color: "#626262",
@@ -17,7 +27,7 @@ export const InnerCard = (img) => {
       >
         <Card.Img
           variant="top"
-          src={img.img}
+          src={`./uploads/${ad.images[0]}`}
           height={300}
           // style={{ objectFit: "cover" }}
         />
@@ -31,7 +41,7 @@ export const InnerCard = (img) => {
               fontSize: "14px",
             }}
           >
-            A Textbook of Applied Physics
+            {title}
             <span style={{ userSelect: "none" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -49,9 +59,11 @@ export const InnerCard = (img) => {
             </span>
           </Card.Title>
           <Card.Text style={{ fontSize: "25px", fontWeight: "bold" }}>
-            Rs 450
+            Rs {ad.price}
           </Card.Text>
-          <Card.Text style={{ fontSize: "13px" }}>DTU - 3 mins ago</Card.Text>
+          <Card.Text style={{ fontSize: "13px" }}>
+            {ad.location} - {time}
+          </Card.Text>
         </Card.Body>
       </Card>
     </Col>

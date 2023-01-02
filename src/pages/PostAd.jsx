@@ -16,7 +16,7 @@ const PostAd = () => {
     description: "",
     brand: "",
     condition: "New",
-    category: "Mobile Phones",
+    category: "Books",
     price: null,
     images: [],
   });
@@ -98,7 +98,7 @@ const PostAd = () => {
 
   return (
     <div className="contact_page">
-      <div className="cliped_bg post_cliped_bg"></div>
+      <div className="cliped_bg"></div>
       <Container>
         <div className="contact_us_container">
           <h3 className="heading" style={{ color: "#fff" }}>
@@ -184,7 +184,7 @@ const PostAd = () => {
                     onChange: setValue,
                   }}
                   autocompletionRequest={{
-                    componentRestrictions: { country: ["pk"] },
+                    componentRestrictions: { country: ["in"] },
                   }}
                 />
               </div>

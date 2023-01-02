@@ -16,6 +16,7 @@ import { PublicRoute, ProtectedRoute } from "./utilities/ProtectedRoute";
 import Ad from "./pages/Item";
 import MyAds from "./pages/MyAds";
 import UpdateAd from "./pages/UpdateAd";
+import Error from "./components/Error";
 
 function App() {
   return (
@@ -27,9 +28,9 @@ function App() {
           <Route
             path="/post"
             element={
-              // <ProtectedRoute>
-              <PostAd />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <PostAd />
+              </ProtectedRoute>
             }
           />
           <Route
@@ -75,21 +76,21 @@ function App() {
           <Route
             path="/myads"
             element={
-              // <ProtectedRoute>
-              <MyAds />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <MyAds />
+              </ProtectedRoute>
             }
           />
           <Route
-            // path="/update/item/:id"
-            path="/update/item"
+            path="/update/item/:id"
             element={
-              // <ProtectedRoute>
-              <UpdateAd />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <UpdateAd />
+              </ProtectedRoute>
             }
           />
-          <Route path="/item" element={<Ad />} />
+          <Route path="/item/:id" element={<Ad />} />
+          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </Router>

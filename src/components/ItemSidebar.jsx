@@ -9,83 +9,67 @@ import { Loader } from "@googlemaps/js-api-loader";
 
 const ItemSidebar = ({ ad }) => {
   const dispatch = useDispatch();
-  // const { fullname, email, phoneno } = useSelector(
-  //   (select) => select.ads.itemUser
-  // );
+  const { fullname, email, phoneno } = useSelector(
+    (select) => select.ads.itemUser
+  );
 
-  // const time = moment(ad.createdAt).fromNow();
-  // const date = moment(ad.createdAt).format("ll");
+  const time = moment(ad.createdAt).fromNow();
+  const date = moment(ad.createdAt).format("ll");
 
-  // useEffect(() => {
-  //   dispatch(itemUser(ad.user));
+  useEffect(() => {
+    dispatch(itemUser(ad.user));
 
-  //   return () => dispatch(resetUserItem());
-  // }, [dispatch, ad.user]);
+    return () => dispatch(resetUserItem());
+  }, [dispatch, ad.user]);
 
-  // useEffect(() => {
-  //   /* global google */
+  useEffect(() => {
+    /* global google */
 
-  //   const loader = new Loader({
-  //     apiKey: "AIzaSyCxQJiXRp0_v0M3bL-103dsdCStBf6qskE",
-  //     version: "weekly",
-  //   });
+    const loader = new Loader({
+      apiKey: "AIzaSyCxQJiXRp0_v0M3bL-103dsdCStBf6qskE",
+      version: "weekly",
+    });
 
-  //   loader.load().then(() => {
-  //     initGeocodingMap();
-  //   });
+    loader.load().then(() => {
+      initGeocodingMap();
+    });
 
-  //   function initGeocodingMap() {
-  //     const location = ad && ad.location;
-  //     const geocoder = new google.maps.Geocoder();
+    function initGeocodingMap() {
+      const location = ad && ad.location;
+      const geocoder = new google.maps.Geocoder();
 
-  //     geocoder.geocode({ address: location }, function (results, status) {
-  //       let lat;
-  //       let lng;
+      geocoder.geocode({ address: location }, function (results, status) {
+        let lat;
+        let lng;
 
-  //       if (status === "OK") {
-  //         lat = results[0].geometry.location.lat();
-  //         lng = results[0].geometry.location.lng();
-  //       }
+        if (status === "OK") {
+          lat = results[0].geometry.location.lat();
+          lng = results[0].geometry.location.lng();
+        }
 
-  //       var myLatLng = { lat, lng };
+        var myLatLng = { lat, lng };
 
-  //       var map = new google.maps.Map(document.getElementById("map"), {
-  //         zoom: 11,
-  //         center: myLatLng,
-  //       });
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 11,
+          center: myLatLng,
+        });
 
-  //       new google.maps.Marker({
-  //         position: myLatLng,
-  //         map: map,
-  //         title: "Hello World!",
-  //       });
-  //     });
-  //   }
-  // }, [ad]);
+        new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: "Hello World!",
+        });
+      });
+    }
+  }, [ad]);
 
   return (
     <div className="item_sidebar_container">
-      {/* <div className="details_container">
-        <h1 className="heading" style={{ fontSize: '2rem' }}>
-          Rs {ad.price}
-        </h1>
-        <div
-          className="description"
-          style={{ opacity: '.6', marginTop: '12px' }}
-        >
-          {ad.title}
-        </div>
-
-        <div className="d-flex justify-content-between mt-3">
-          <span>{ad.location}</span>
-          <span>{time}</span>
-        </div>
-      </div> */}
-
       <div className="details_container">
         <h1 className="heading" style={{ fontSize: "1.5rem" }}>
           Seller Description
         </h1>
+
         <div style={{ display: "flex", alignItems: "center" }}>
           <img src={profile} style={{ width: "60px" }} alt="profile" />
           <div
@@ -95,23 +79,24 @@ const ItemSidebar = ({ ad }) => {
               marginLeft: "1rem",
             }}
           >
-            <span style={{ fontWeight: "bold" }}>Tarun Kumar</span>
-            <span style={{ opacity: ".6" }}>Member since 5th Sept 2022</span>
+            <span style={{ fontWeight: "bold" }}>{fullname && fullname}</span>
+            <span style={{ opacity: ".6" }}>Member since {date}</span>
           </div>
         </div>
+
         <p style={{ marginTop: "14px" }}>
-          <span style={{ fontWeight: "bold" }}>Email:</span>{" "}
-          UniConnect@gmail.com
+          <span style={{ fontWeight: "bold" }}>Email:</span> {email && email}
         </p>
-        {/* {phoneno && ( */}
-        <p style={{ marginTop: "14px", marginBottom: "0px" }}>
-          <span style={{ fontWeight: "bold" }}>Phone:</span> +91 123-456-7890
-        </p>
-        {/* )} */}
+        {phoneno && (
+          <p style={{ marginTop: "14px", marginBottom: "0px" }}>
+            <span style={{ fontWeight: "bold" }}>Phone:</span>{" "}
+            {phoneno && phoneno}
+          </p>
+        )}
       </div>
 
       {/* map */}
-      {/* <div className="details_container">
+      <div className="details_container">
         <h1 className="heading" style={{ fontSize: "1.5rem" }}>
           Posted in
         </h1>
@@ -122,13 +107,13 @@ const ItemSidebar = ({ ad }) => {
           id="map"
           style={{ width: "100%", height: "500px", marginTop: ".5rem" }}
         ></div>
-      </div> */}
+      </div>
 
       <div
         className="details_container"
         style={{ fontWeight: "bold", marginTop: "8px", paddingLeft: "10px" }}
       >
-        AD ID 631f3bd7d682ee067c0b47ab
+        AD ID {ad._id}
       </div>
     </div>
   );

@@ -55,8 +55,8 @@ export function FileUpload({ allValues, setAllValues }) {
                   <img
                     src={image["data_url"]}
                     alt=""
-                    width="250"
-                    style={{ height: "auto" }}
+                    width="100"
+                    style={{ height: "100px" }}
                   />
                   <img
                     src={edit}
