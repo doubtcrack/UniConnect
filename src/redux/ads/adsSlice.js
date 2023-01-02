@@ -256,7 +256,7 @@ export const authSlice = createSlice({
       })
       .addCase(updateAd.fulfilled, (state, actions) => {
         state.successMessage = actions.payload.successMsg;
-        console.log(actions.payload);
+        // console.log(actions.payload);
         state.isSuccess = true;
         state.isLoading = false;
         state.isError = false;
