@@ -44,7 +44,7 @@ const Cards = () => {
           </div>
         )} */}
         {Array.isArray(filteredAds) ? (
-          filteredAds.map((ad) => <InnerCard ad={ad} key={ad.id} />)
+          filteredAds.map((ad) => <InnerCard ad={ad} />)
         ) : (
           <div style={{ height: "35vh" }}>
             <h1>You have no ads to show</h1>
