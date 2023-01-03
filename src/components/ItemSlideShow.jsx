@@ -77,7 +77,7 @@ const InnerCard = ({ ad }) => {
   };
 
   return (
-    <div key={ad._id} onClick={() => handleClick(ad._id)}>
+    <div key={ad._id * 2} onClick={() => handleClick(ad._id)}>
       <Card style={{ width: "100%", cursor: "pointer" }}>
         <Card.Img
           variant="top"

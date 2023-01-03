@@ -36,8 +36,15 @@ const Cards = () => {
   return (
     <div className="AdCard">
       <Row className="g-3">
-        {filteredAds.length > 0 ? (
+        {/* {filteredAds.length > 0 ? (
           filteredAds.map((ad) => <InnerCard ad={ad} />)
+        ) : (
+          <div style={{ height: "35vh" }}>
+            <h1>You have no ads to show</h1>
+          </div>
+        )} */}
+        {Array.isArray(filteredAds) ? (
+          filteredAds.map((ad) => <InnerCard ad={ad} key={ad.id} />)
         ) : (
           <div style={{ height: "35vh" }}>
             <h1>You have no ads to show</h1>
