@@ -5,7 +5,7 @@ import { itemUser, resetUserItem } from "../redux/ads/adsSlice";
 import profile from "../images/profile.png";
 import moment from "moment";
 
-import { Loader } from "@googlemaps/js-api-loader";
+// import { Loader } from "@googlemaps/js-api-loader";
 
 const ItemSidebar = ({ ad }) => {
   const dispatch = useDispatch();
@@ -22,46 +22,46 @@ const ItemSidebar = ({ ad }) => {
     return () => dispatch(resetUserItem());
   }, [dispatch, ad.user]);
 
-  useEffect(() => {
-    /* global google */
+  // useEffect(() => {
+  //   /* global google */
 
-    const loader = new Loader({
-      apiKey: "AIzaSyCxQJiXRp0_v0M3bL-103dsdCStBf6qskE",
-      version: "weekly",
-    });
+  //   const loader = new Loader({
+  //     apiKey: "AIzaSyCxQJiXRp0_v0M3bL-103dsdCStBf6qskE",
+  //     version: "weekly",
+  //   });
 
-    loader.load().then(() => {
-      initGeocodingMap();
-    });
+  //   loader.load().then(() => {
+  //     initGeocodingMap();
+  //   });
 
-    function initGeocodingMap() {
-      const location = ad && ad.location;
-      const geocoder = new google.maps.Geocoder();
+  //   function initGeocodingMap() {
+  //     const location = ad && ad.location;
+  //     const geocoder = new google.maps.Geocoder();
 
-      geocoder.geocode({ address: location }, function (results, status) {
-        let lat;
-        let lng;
+  //     geocoder.geocode({ address: location }, function (results, status) {
+  //       let lat;
+  //       let lng;
 
-        if (status === "OK") {
-          lat = results[0].geometry.location.lat();
-          lng = results[0].geometry.location.lng();
-        }
+  //       if (status === "OK") {
+  //         lat = results[0].geometry.location.lat();
+  //         lng = results[0].geometry.location.lng();
+  //       }
 
-        var myLatLng = { lat, lng };
+  //       var myLatLng = { lat, lng };
 
-        var map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 11,
-          center: myLatLng,
-        });
+  //       var map = new google.maps.Map(document.getElementById("map"), {
+  //         zoom: 11,
+  //         center: myLatLng,
+  //       });
 
-        new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: "Hello World!",
-        });
-      });
-    }
-  }, [ad]);
+  //       new google.maps.Marker({
+  //         position: myLatLng,
+  //         map: map,
+  //         title: "Hello World!",
+  //       });
+  //     });
+  //   }
+  // }, [ad]);
 
   return (
     <div className="item_sidebar_container">
