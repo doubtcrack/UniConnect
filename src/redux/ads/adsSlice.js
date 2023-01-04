@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adsService from "./adsService";
 
+const url = "https://uni-connect.vercel.app";
 const initialState = {
   ads: [],
   filteredAds: [],
@@ -15,7 +16,7 @@ const initialState = {
 
 // POST AD
 export const postAd = createAsyncThunk(
-  "/api/postad",
+  `${url}/api/postad`,
   async (data, ThunkAPI) => {
     try {
       return await adsService.postAd(data);
@@ -32,7 +33,7 @@ export const postAd = createAsyncThunk(
 );
 // GET ADS
 export const getAds = createAsyncThunk(
-  "/api/getads",
+  `${url}/api/getads`,
   async (data, ThunkAPI) => {
     try {
       return await adsService.getAds();
@@ -48,21 +49,26 @@ export const getAds = createAsyncThunk(
   }
 );
 // GET MY ADS
-export const myads = createAsyncThunk("/api/myads", async (data, ThunkAPI) => {
-  const token = JSON.parse(localStorage.getItem("token"));
-  try {
-    return await adsService.myads(token);
-  } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return ThunkAPI.rejectWithValue(message);
+export const myads = createAsyncThunk(
+  `${url}/api/myads`,
+  async (data, ThunkAPI) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    try {
+      return await adsService.myads(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return ThunkAPI.rejectWithValue(message);
+    }
   }
-});
+);
 // DELETE AD
 export const deleteAd = createAsyncThunk(
-  "/api/deleteAd",
+  `${url}/api/deleteAd`,
   async (id, ThunkAPI) => {
     try {
       return await adsService.deleteAd(id);
@@ -80,7 +86,7 @@ export const deleteAd = createAsyncThunk(
 
 // UPDATE AD
 export const updateAd = createAsyncThunk(
-  "/api/updateAd",
+  `${url}/api/updateAd`,
   async (data, ThunkAPI) => {
     try {
       return await adsService.updateAd(data);
@@ -98,7 +104,7 @@ export const updateAd = createAsyncThunk(
 
 // GET ITEM USER
 export const itemUser = createAsyncThunk(
-  "/api/getItemUser",
+  `${url}/api/getItemUser`,
   async (userId, ThunkAPI) => {
     try {
       return await adsService.getItemUser(userId);

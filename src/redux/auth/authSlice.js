@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
 const user = JSON.parse(localStorage.getItem("user"));
+const url = "https://uni-connect.vercel.app";
 
 const initialState = {
   user: user ? user : null,
@@ -14,7 +15,7 @@ const initialState = {
 
 // register
 export const register = createAsyncThunk(
-  "auth/register",
+  `${url}/auth/register`,
   async (data, ThunkAPI) => {
     try {
       return await authService.register(data);
@@ -31,7 +32,7 @@ export const register = createAsyncThunk(
 );
 // activate account
 export const activateAccount = createAsyncThunk(
-  "auth/activate-account",
+  `${url}/auth/activate-account`,
   async (token, ThunkAPI) => {
     try {
       return await authService.activateAccount(token);
@@ -48,7 +49,7 @@ export const activateAccount = createAsyncThunk(
 );
 
 // LOGIN
-export const login = createAsyncThunk("auth/login", async (data, ThunkAPI) => {
+export const login = createAsyncThunk(`${url}/auth/login`, async (data, ThunkAPI) => {
   try {
     return await authService.login(data);
   } catch (error) {
@@ -61,7 +62,7 @@ export const login = createAsyncThunk("auth/login", async (data, ThunkAPI) => {
 });
 // GOOGLE LOGIN
 export const googleLogin = createAsyncThunk(
-  "auth/googlelogin",
+  `${url}/auth/googlelogin`,
   async (response, ThunkAPI) => {
     try {
       return await authService.googleLogin(response);
@@ -78,7 +79,7 @@ export const googleLogin = createAsyncThunk(
 );
 // FIND ACCOUNT
 export const findAccount = createAsyncThunk(
-  "auth/find-account",
+  `${url}/auth/find-account`,
   async (email, ThunkAPI) => {
     try {
       return await authService.findAccount(email);
@@ -95,7 +96,7 @@ export const findAccount = createAsyncThunk(
 );
 // CHANGE PASSWORD
 export const changePassword = createAsyncThunk(
-  "auth/change-password",
+  `${url}/auth/change-password`,
   async (data, ThunkAPI) => {
     try {
       return await authService.changePassword(data);

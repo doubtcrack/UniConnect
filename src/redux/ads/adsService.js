@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "/api";
+const url = "https://uni-connect.vercel.app";
 
 // POST ADS
 const postAd = async (data) => {
@@ -11,7 +11,7 @@ const postAd = async (data) => {
 
   const ad = await axios({
     method: "post",
-    url: `${url}/post`,
+    url: `${url}/api/post`,
     headers: header,
     data,
   });
@@ -21,7 +21,7 @@ const postAd = async (data) => {
 
 // GET ADS
 const getAds = async () => {
-  const ads = await axios.get(`${url}/items`);
+  const ads = await axios.get(`${url}/api/items`);
 
   return ads.data;
 };
@@ -30,7 +30,7 @@ const getAds = async () => {
 const getItemUser = async (userId) => {
   const user = await axios({
     method: "post",
-    url: `${url}/item/user`,
+    url: `${url}/api/item/user`,
     data: { userId },
   });
 
@@ -47,7 +47,7 @@ const myads = async () => {
 
   const user = await axios({
     method: "get",
-    url: `${url}/myads`,
+    url: `${url}/api/myads`,
     headers: header,
   });
 
@@ -63,7 +63,7 @@ const deleteAd = async (id) => {
 
   const user = await axios({
     method: "delete",
-    url: `${url}/item/delete/${id}`,
+    url: `${url}/api/item/delete/${id}`,
     headers: header,
   });
 
@@ -80,7 +80,7 @@ const updateAd = async ({ id, ad }) => {
 
   const user = await axios({
     method: "put",
-    url: `${url}/item/update/${id}`,
+    url: `${url}/api/item/update/${id}`,
     data: ad,
     headers: header,
   });
