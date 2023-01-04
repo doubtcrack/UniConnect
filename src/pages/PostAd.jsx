@@ -7,10 +7,8 @@ import { FileUpload } from "../components/FileUpload";
 import { postAd } from "../redux/ads/adsSlice";
 import toast from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const PostAd = () => {
-  const [value, setValue] = useState(null);
   const [allValues, setAllValues] = useState({
     title: "",
     description: "",
@@ -19,8 +17,9 @@ const PostAd = () => {
     category: "Books",
     price: null,
     images: [],
+    location: "Delhi Technological University(DTU)",
   });
-
+  // console.log(allValues);
   const dispatch = useDispatch();
   const { errorMessage, successMessage, isError, isSuccess, isLoading } =
     useSelector((selector) => selector.ads);
@@ -44,7 +43,9 @@ const PostAd = () => {
   const categoryDropdownChange = (e) => {
     setAllValues({ ...allValues, category: e.target.value });
   };
-
+  const location = (e) => {
+    setAllValues({ ...allValues, location: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -54,17 +55,12 @@ const PostAd = () => {
       formData.append("images", allValues.images[i].file);
     }
 
-    if (!value) {
-      toast.error("Location cannot be empty");
-      return;
-    }
-
     formData.append("title", allValues.title);
     formData.append("brand", allValues.brand);
     formData.append("category", allValues.category);
     formData.append("condition", allValues.condition);
     formData.append("description", allValues.description);
-    formData.append("location", value.label);
+    formData.append("location", allValues.location);
     formData.append("price", allValues.price);
 
     dispatch(postAd(formData));
@@ -73,11 +69,11 @@ const PostAd = () => {
       title: "",
       description: "",
       brand: "",
-      condition: "",
+      condition: "New",
       category: "Books",
       price: null,
       images: [],
-      location: "",
+      location: "Delhi Technological University(DTU)",
     });
   };
 
@@ -178,15 +174,26 @@ const PostAd = () => {
                 <label className="mb-2 text-uppercase">
                   Enter your location
                 </label>
-                <GooglePlacesAutocomplete
-                  selectProps={{
-                    value,
-                    onChange: setValue,
-                  }}
-                  autocompletionRequest={{
-                    componentRestrictions: { country: ["in"] },
-                  }}
-                />
+
+                <Form.Select onChange={location}>
+                  <option value="Delhi Technological University(DTU)">
+                    Delhi Technological University(DTU)
+                  </option>
+                  <option value="Netaji Subhas Institute of Technology(NSIT)">
+                    Netaji Subhas Institute of Technology(NSIT)
+                  </option>
+                  <option value="Indra Gandhi Delhi Technological University for Women(IGDTUW)">
+                    Indra Gandhi Delhi Technological University for
+                    Women(IGDTUW)
+                  </option>
+                  <option value="Indraprastha Institude of Information Technology Delhi(IIITD)">
+                    Indraprastha Institude of Information Technology
+                    Delhi(IIITD)
+                  </option>
+                  <option value="Indian Institude of Technology Delhi(IIT)">
+                    Indian Institude of Technology Delhi(IIT)
+                  </option>
+                </Form.Select>
               </div>
             </Row>
 

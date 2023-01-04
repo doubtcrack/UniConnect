@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+// import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -29,12 +29,11 @@ function Header() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const ad_location = useLocation();
   const { user } = useSelector((select) => select.auth);
-
   useEffect(() => {
     if (value || value !== null) {
-      dispatch(filterAds(value.label));
+      dispatch(filterAds(value));
     }
   }, [dispatch, value]);
 
@@ -60,7 +59,9 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const location = (e) => {
+    setValue(e.target.value);
+  };
   return (
     <Navbar bg="light" expand="lg" style={{ height: "80px" }}>
       <Container>
@@ -71,7 +72,7 @@ function Header() {
         <Navbar.Collapse id="navbarScroll">
           <Form className="d-flex" style={{ flex: 1 }}>
             <div style={{ width: "50%" }}>
-              <GooglePlacesAutocomplete
+              {/* <GooglePlacesAutocomplete
                 selectProps={{
                   value,
                   onChange: setValue,
@@ -79,7 +80,24 @@ function Header() {
                 autocompletionRequest={{
                   componentRestrictions: { country: ["in"] },
                 }}
-              />
+              /> */}
+              <Form.Select onChange={location}>
+                <option value="Delhi Technological University(DTU)">
+                  Delhi Technological University(DTU)
+                </option>
+                <option value="Netaji Subhas Institute of Technology(NSIT)">
+                  Netaji Subhas Institute of Technology(NSIT)
+                </option>
+                <option value="Indra Gandhi Delhi Technological University for Women(IGDTUW)">
+                  Indra Gandhi Delhi Technological University for Women(IGDTUW)
+                </option>
+                <option value="Indraprastha Institude of Information Technology Delhi(IIITD)">
+                  Indraprastha Institude of Information Technology Delhi(IIITD)
+                </option>
+                <option value="Indian Institude of Technology Delhi(IIT)">
+                  Indian Institude of Technology Delhi(IIT)
+                </option>
+              </Form.Select>
             </div>
             <Form.Control
               type="search"

@@ -7,7 +7,6 @@ import { FileUpload } from "../components/FileUpload";
 import { reset, updateAd } from "../redux/ads/adsSlice";
 import toast from "react-hot-toast";
 import { ThreeDots } from "react-loader-spinner";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { useLocation } from "react-router-dom";
 
 const UpdateAd = () => {
@@ -20,11 +19,12 @@ const UpdateAd = () => {
     category: "",
     price: null,
     images: [],
+    location: "",
   });
 
   const dispatch = useDispatch();
-  const location = useLocation();
-  const id = location.state;
+  const ad_location = useLocation();
+  const id = ad_location.state;
   const { errorMessage, successMessage, isError, isSuccess, isLoading } =
     useSelector((selector) => selector.ads);
 
@@ -51,7 +51,9 @@ const UpdateAd = () => {
   const categoryDropdownChange = (e) => {
     setAllValues({ ...allValues, category: e.target.value });
   };
-
+  const location = (e) => {
+    setAllValues({ ...allValues, location: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -70,12 +72,8 @@ const UpdateAd = () => {
     allValues.description &&
       formData.append("description", allValues.description);
 
-    if (value !== null) {
-      formData.append("location", value && value.label);
-    }
-
     allValues.price && formData.append("price", allValues.price);
-
+    allValues.location && formData.append("location", allValues.location);
     dispatch(updateAd({ id, ad: formData }));
 
     setAllValues({
@@ -86,7 +84,7 @@ const UpdateAd = () => {
       category: allValues.category,
       price: allValues.price,
       images: [],
-      location: "",
+      location: allValues.location,
     });
   };
   if (isLoading) {
@@ -185,15 +183,25 @@ const UpdateAd = () => {
                 <label className="mb-2 text-uppercase">
                   Enter your location
                 </label>
-                <GooglePlacesAutocomplete
-                  selectProps={{
-                    value,
-                    onChange: setValue,
-                  }}
-                  autocompletionRequest={{
-                    componentRestrictions: { country: ["in"] },
-                  }}
-                />
+                <Form.Select onChange={location}>
+                  <option value="Delhi Technological University(DTU)">
+                    Delhi Technological University(DTU)
+                  </option>
+                  <option value="Netaji Subhas Institute of Technology(NSIT)">
+                    Netaji Subhas Institute of Technology(NSIT)
+                  </option>
+                  <option value="Indra Gandhi Delhi Technological University for Women(IGDTUW)">
+                    Indra Gandhi Delhi Technological University for
+                    Women(IGDTUW)
+                  </option>
+                  <option value="Indraprastha Institude of Information Technology Delhi(IIITD)">
+                    Indraprastha Institude of Information Technology
+                    Delhi(IIITD)
+                  </option>
+                  <option value="Indian Institude of Technology Delhi(IIT)">
+                    Indian Institude of Technology Delhi(IIT)
+                  </option>
+                </Form.Select>
               </div>
             </Row>
 
